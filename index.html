@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hazmi — Portofolio Pribadi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fdfbf7;
+      --surface: #ffffff;
+      --ink: #18181b;
+      --muted: #52525b;
+      --border: #18181b;
+      --coral: #ff6b4a;
+      --yellow: #ffd23f;
+      --mint: #3bceac;
+      --lavender: #a78bfa;
+      --shadow: 6px 6px 0px #18181b;
+      --radius: 20px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body {
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      background-color: var(--bg);
+      background-image: radial-gradient(#d4d4d8 1.2px, transparent 1.2px);
+      background-size: 24px 24px;
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    /* NAVIGASI */
+    nav {
+      position: sticky; top: 14px; z-index: 100;
+      max-width: 960px; margin: 14px auto 0; padding: 12px 24px;
+      background: var(--surface);
+      border: 2.5px solid var(--border);
+      border-radius: 999px;
+      box-shadow: 4px 4px 0px var(--border);
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .brand {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 800; font-size: 1.25rem;
+      text-decoration: none; color: var(--ink);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .brand-dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--coral); border: 2px solid var(--border);
+    }
+    .nav-menu {
+      display: flex; gap: 6px; list-style: none; flex-wrap: wrap;
+    }
+    .nav-menu a {
+      text-decoration: none; color: var(--ink);
+      font-weight: 700; font-size: 14px;
+      padding: 6px 14px; border-radius: 999px;
+      transition: 0.15s;
+    }
+    .nav-menu a:hover {
+      background: var(--yellow);
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: 1020px; margin: 0 auto; padding: 0 22px;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 64px 0 72px;
+      display: grid; grid-template-columns: 1.2fr 0.8fr;
+      gap: 44px; align-items: center;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--yellow);
+      border: 2px solid var(--border);
+      padding: 6px 16px; border-radius: 999px;
+      font-weight: 700; font-size: 14px;
+      box-shadow: 3px 3px 0px var(--border);
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1.08; font-weight: 800;
+      margin-bottom: 18px;
+    }
+    .hero h1 .highlight {
+      background: var(--mint);
+      padding: 0 10px;
+      border-radius: 10px;
+      border: 2px solid var(--border);
+      display: inline-block;
+      transform: rotate(-1deg);
+    }
+    .hero-sub {
+      font-size: 1.15rem; color: var(--muted);
+      max-width: 48ch; margin-bottom: 28px; font-weight: 500;
+    }
+    .hero-actions {
+      display: flex; gap: 14px; flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 24px; border-radius: 14px;
+      font-weight: 700; font-size: 15px; text-decoration: none;
+      border: 2.5px solid var(--border);
+      box-shadow: 4px 4px 0px var(--border);
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+    }
+    .btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px var(--border);
+    }
+    .btn-primary { background: var(--coral); color: #fff; }
+    .btn-secondary { background: var(--surface); color: var(--ink); }
+
+    /* FOTO PROFIL BENTO */
+    .photo-card {
+      position: relative;
+      background: var(--lavender);
+      border: 3px solid var(--border);
+      border-radius: 28px;
+      padding: 16px;
+      box-shadow: 8px 8px 0px var(--border);
+      transform: rotate(2deg);
+      transition: transform 0.25s;
+    }
+    .photo-card:hover { transform: rotate(0deg); }
+    .photo-frame {
+      width: 100%; aspect-ratio: 1 / 1.08;
+      border-radius: 18px; overflow: hidden;
+      border: 2.5px solid var(--border);
+      background: #fff; position: relative;
+    }
+    .photo-frame img, .photo-placeholder {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .photo-placeholder {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: #fff7ed; color: var(--ink);
+    }
+    .photo-placeholder span {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 4rem; font-weight: 800; line-height: 1;
+    }
+    .photo-placeholder small {
+      font-size: 13px; font-weight: 600; color: var(--muted); margin-top: 6px;
+    }
+    .change-photo-btn {
+      position: absolute; bottom: 26px; right: 26px;
+      background: var(--yellow); color: var(--ink);
+      border: 2px solid var(--border);
+      border-radius: 999px; padding: 6px 14px;
+      font-size: 12px; font-weight: 800;
+      cursor: pointer; box-shadow: 3px 3px 0px var(--border);
+      transition: 0.15s;
+    }
+    .change-photo-btn:hover { background: #fde047; }
+    #photoUpload { display: none; }
+
+    /* SECTION STYLING */
+    section { padding: 68px 0; }
+    .section-head {
+      margin-bottom: 36px;
+    }
+    .section-tag {
+      display: inline-block;
+      font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+      background: var(--ink); color: #fff;
+      padding: 4px 12px; border-radius: 8px; margin-bottom: 10px;
+    }
+    .section-head h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+    }
+
+    /* BENTO GRID ABOUT */
+    .bento-about {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 24px;
+    }
+    .card {
+      background: var(--surface);
+      border: 2.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+    .card.yellow { background: #fef9c3; }
+    .card.mint { background: #dcfce7; }
+    .card.blue { background: #e0f2fe; }
+    .card h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.3rem; font-weight: 800;
+      margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card p { color: #27272a; font-size: 1.02rem; }
+    .card p + p { margin-top: 12px; }
+
+    /* KARTU FAKTA SINGKAT */
+    .fact-list {
+      list-style: none; display: grid; gap: 14px;
+    }
+    .fact-item {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 18px;
+      box-shadow: 3px 3px 0px var(--border);
+    }
+    .fact-item small {
+      display: block; font-size: 12px; font-weight: 700;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .fact-item strong {
+      font-size: 16px; color: var(--ink);
+    }
+
+    /* KEAHLIAN */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .skill-card {
+      background: var(--surface);
+      border: 2.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 5px 5px 0px var(--border);
+      transition: transform 0.15s;
+    }
+    .skill-card:hover { transform: translateY(-4px); }
+    .skill-emoji {
+      width: 52px; height: 52px; border-radius: 14px;
+      border: 2px solid var(--border);
+      display: grid; place-items: center; font-size: 24px;
+      margin-bottom: 14px;
+    }
+    .bg-c1 { background: var(--yellow); }
+    .bg-c2 { background: var(--mint); }
+    .bg-c3 { background: #fda4af; }
+    .bg-c4 { background: #93c5fd; }
+    .skill-card h4 { font-size: 18px; font-weight: 800; margin-bottom: 6px; }
+    .skill-card p { font-size: 14.5px; color: var(--muted); }
+
+    /* TARGET & HARAPAN */
+    .goals-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    }
+
+    /* MEDIA SOSIAL */
+    .social-wrap {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .social-btn {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--surface);
+      border: 2.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      text-decoration: none; color: var(--ink);
+      box-shadow: 5px 5px 0px var(--border);
+      transition: 0.15s;
+    }
+    .social-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0px var(--border);
+      background: var(--yellow);
+    }
+    .social-ico {
+      width: 50px; height: 50px; border-radius: 14px;
+      border: 2px solid var(--border);
+      display: grid; place-items: center; flex: none;
+    }
+    .social-ico svg { width: 24px; height: 24px; fill: #fff; }
+    .ico-ig { background: #ec4899; }
+    .ico-wa { background: #22c55e; }
+    .social-btn strong { display: block; font-size: 17px; }
+    .social-btn span { font-size: 14px; color: var(--muted); font-weight: 600; }
+
+    /* FOOTER */
+    footer {
+      margin-top: 40px;
+      background: var(--ink); color: #fff;
+      text-align: center; padding: 28px 20px;
+      font-size: 14px; font-weight: 500;
+    }
+
+    .share-link {
+      margin-top: 14px; font-size: 13px;
+      display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px;
+    }
+    .share-link a { color: var(--yellow); font-weight: 700; word-break: break-all; }
+    .share-link button {
+      background: var(--yellow); color: var(--ink);
+      border: 2px solid #fff; border-radius: 999px;
+      padding: 4px 14px; font-size: 12px; font-weight: 800; cursor: pointer;
+    }
+
+    @media (max-width: 820px) {
+      .hero, .bento-about, .goals-grid { grid-template-columns: 1fr; }
+      .hero { padding: 44px 0 56px; }
+      .photo-card { max-width: 300px; margin: 0 auto; transform: rotate(0deg); }
+      nav { border-radius: 20px; margin: 10px 14px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGASI -->
+  <nav>
+    <a href="#beranda" class="brand"><span class="brand-dot"></span> Hazmi.</a>
+    <ul class="nav-menu">
+      <li><a href="#tentang">Kenalan</a></li>
+      <li><a href="#belajar">Lagi Belajar</a></li>
+      <li><a href="#target">Target</a></li>
+      <li><a href="#kontak">Ngobrol Yuk</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <!-- HERO -->
+    <header class="hero" id="beranda">
+      <div>
+        <div class="pill">👋 Halo! Selamat datang di halaman saya</div>
+        <h1>Saya <span class="highlight">Muhammad Al Hazmi Luqman</span></h1>
+        <p class="hero-sub">
+        
+        <div class="hero-actions">
+          <a href="#tentang" class="btn btn-primary">Kenalan Lebih Dekat</a>
+          <a href="#kontak" class="btn btn-secondary">Hubungi Saya</a>
+        </div>
+      </div>
+
+      <!-- FOTO PROFIL -->
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img id="fotoProfil" src="hazmi.jpeg" alt="Foto Muhammad Al Hazmi Luqman"
+               onerror="this.style.display='none'; document.getElementById('fotoPlaceholder').style.display='flex';">
+          <div id="fotoPlaceholder" class="photo-placeholder" style="display:none;">
+            <span>HL</span>
+            <small>Foto belum dipasang</small>
+          </div>
+        </div>
+        <label for="photoUpload" class="change-photo-btn">📷 Ganti Foto</label>
+        <input type="file" id="photoUpload" accept="image/*">
+      </div>
+    </header>
+
+    <!-- TENTANG SAYA -->
+    <section id="tentang">
+      <div class="section-head">
+        <span class="section-tag">01 · Cerita Singkat</span>
+        <h2>Siapa Saya?</h2>
+      </div>
+
+      <div class="bento-about">
+        <div class="card">
+          <h3>😊 Salam Kenal!</h3>
+          <p>
+            Assalamualaikum! Nama lengkap saya <strong>Muhammad Al Hazmi Luqman</strong>, biasa dipanggil <strong>Hazmi</strong>. Saat ini saya kuliah semester 1 jurusan Teknik Informatika di Universitas Pamulang.
+          </p>
+          <p>
+            Saya percaya tidak ada yang langsung jago dalam semalam yang penting mau terus mencoba, belajar dari kesalahan, dan pelan-pelan berkembang setiap hari.
+          </p>
+        </div>
+
+        <ul class="fact-list">
+          <li class="fact-item">
+            <small>📍 Domisili</small>
+            <strong>Depok, Jawa Barat</strong>
+          </li>
+          <li class="fact-item">
+            <small>🎓 Kampus & Jurusan</small>
+            <strong>Teknik Informatika · UNPAM</strong>
+          </li>
+          <li class="fact-item">
+            <small>💡 Alasan Masuk IT</small>
+            <strong>Peluang kerja yang sangat luas</strong>
+          </li>
+          <li class="fact-item">
+            <small>🤝 Status</small>
+            <strong>Single</strong>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LAGI BELAJAR APA -->
+    <section id="belajar">
+      <div class="section-head">
+        <span class="section-tag">02 · Fokus Saat Ini</span>
+        <h2>Apa yang Sedang Saya Pelajari?</h2>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-emoji bg-c1">🧩</div>
+          <h4>Logika & Algoritma</h4>
+          <p>Belajar menyusun langkah-langkah penyelesaian masalah secara urut sebelum diubah menjadi kode.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-emoji bg-c2">⌨️</div>
+          <h4>C++ & Python</h4>
+          <p>Mengenal bahasa pemrograman dasar untuk melatih cara komputer membaca dan menjalankan perintah.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-emoji bg-c3">🌐</div>
+          <h4>Web Dasar (HTML & CSS)</h4>
+          <p>Membuat tampilan halaman website sederhana yang rapi, enak dilihat, dan mudah dibaca.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-emoji bg-c4">💻</div>
+          <h4>Dunia Komputer</h4>
+          <p>Memahami cara kerja perangkat keras, sistem operasi, dan teknologi sehari-hari.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TARGET & HARAPAN -->
+    <section id="target">
+      <div class="section-head">
+        <span class="section-tag">03 · Langkah Ke Depan</span>
+        <h2>Target & Harapan</h2>
+      </div>
+
+      <div class="goals-grid">
+        <div class="card yellow">
+          <h3>🎯 Selama Masa Kuliah</h3>
+          <p>
+            Saya ingin menyerap ilmu dasar informatika dengan baik, aktif berdiskusi dengan teman-teman, dan berani mencoba bikin proyek kecil agar teori di kelas bisa langsung dipraktikkan.
+          </p>
+        </div>
+        <div class="card mint">
+          <h3>🚀 Setelah Lulus Nanti</h3>
+          <p>
+            Harapan saya bisa menjadi lulusan Teknik Informatika yang siap kerja, terus mengikuti perkembangan zaman, dan menciptakan karya teknologi yang bermanfaat bagi keluarga maupun masyarakat luas.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAK -->
+    <section id="kontak">
+      <div class="section-head">
+        <span class="section-tag">04 · Terhubung</span>
+        <h2>Yuk, Sapa atau Diskusi!</h2>
+      </div>
+
+      <div class="social-wrap">
+        <a href="https://instagram.com/mhazmiiii" target="_blank" rel="noopener" class="social-btn">
+          <div class="social-ico ico-ig">
+            <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.5 6a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/></svg>
+          </div>
+          <div>
+            <strong>Instagram</strong>
+            <span>@mhazmiiii</span>
+          </div>
+        </a>
+
+        <a href="https://wa.me/6281295660871" target="_blank" rel="noopener" class="social-btn">
+          <div class="social-ico ico-wa">
+            <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>
+          </div>
+          <div>
+            <strong>WhatsApp</strong>
+            <span> 081295660871</span>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Dibuat oleh <strong>Muhammad Al Hazmi Luqman</strong> · Mahasiswa Teknik Informatika UNPAM · 2026
+    <div class="share-link">
+      <span>🔗 Link website:</span>
+      <a id="siteLink" href="https://claude.ai/artifact/ArtNH4rE25ATg47Qgzpaee" target="_blank" rel="noopener">https://claude.ai/artifact/ArtNH4rE25ATg47Qgzpaee</a>
+      <button type="button" id="copyLinkBtn">Salin Link</button>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var input = document.getElementById('photoUpload');
+      var img = document.getElementById('fotoProfil');
+      var placeholder = document.getElementById('fotoPlaceholder');
+
+      try {
+        var saved = localStorage.getItem('hazmi_bento_photo');
+        if (saved) {
+          img.src = saved;
+          img.style.display = 'block';
+          placeholder.style.display = 'none';
+        }
+      } catch (e) {}
+
+      input.addEventListener('change', function (e) {
+        var file = e.target.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function (ev) {
+          img.src = ev.target.result;
+          img.style.display = 'block';
+          placeholder.style.display = 'none';
+          try { localStorage.setItem('hazmi_bento_photo', ev.target.result); } catch (err) {}
+        };
+        reader.readAsDataURL(file);
+      });
+    })();
+
+    // Tombol salin link website
+    (function () {
+      var btn = document.getElementById('copyLinkBtn');
+      var link = document.getElementById('siteLink').href;
+      btn.addEventListener('click', function () {
+        function done() {
+          btn.textContent = 'Tersalin!';
+          setTimeout(function () { btn.textContent = 'Salin Link'; }, 2000);
+        }
+        try {
+          navigator.clipboard.writeText(link).then(done, fallback);
+        } catch (e) { fallback(); }
+        function fallback() {
+          var t = document.createElement('textarea');
+          t.value = link; document.body.appendChild(t); t.select();
+          try { document.execCommand('copy'); done(); } catch (e) {}
+          document.body.removeChild(t);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
